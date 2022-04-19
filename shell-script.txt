@@ -1,0 +1,74 @@
+TASK-4:
+1. Write a shell script to create a text file with your name(Eg. "name.txt") and write the input given to the script inside the file.
+2. Write a scipt to store the OS, Hostname, available ram and disk size(in GB) inside a file.
+3. Write a script to find if a path exists in the machine. Path is given as input to the script.
+4. Write a script that has a funtion which reutrns the number of files present in a directory. The directory path is given as input.
+5. Write a script to copy a file to another location.The source file path and destination directory is given as inputs.
+
+----------------------------------------------------------------------------------------------------------------------
+
+To save -> sudo vim sample.sh
+To run  ->./sample.sh or bash sample.sh
+
+
+----------------------------------------------------------------------------------------------------------------------
+-> sudo vim sample.sh
+  
+#!/bin/bash
+echo “what is your name?”
+read name
+echo "what is $name age?"
+read age
+echo "my age is $age!"
+----------------------------------------------------------------------------------------------------------------------
+->task1
+
+echo "enter a name to save in txt"
+read nme
+cat > $nme.txt
+----------------------------------------------------------------------------------------------------------------------
+->task2
+
+uname -mrs
+echo
+hostnamectl
+echo
+free -g
+echo
+top
+echo -e
+df -h
+----------------------------------------------------------------------------------------------------------------------
+->task3
+
+echo "Enter a path to find"
+read fin
+if test -e "$fin"; then
+    echo "$fin exists."
+else
+    echo "$fin does not exist."
+fi
+----------------------------------------------------------------------------------------------------------------------
+->task4
+
+echo "enter directory path"
+read dir
+find . -type d -print0 | while read -d '' -r dir; do
+    files=("$dir"/*)
+    echo "No. of files in a directory is" "${#files[@]}" "$dir"
+done
+
+or 
+
+we can use -> ls /etc | wc -l
+----------------------------------------------------------------------------------------------------------------------
+->task5:
+
+echo "enter file path"
+read path
+echo "enter dest path"
+read dest
+mv $path $dest
+echo "successfully moved"
+
+----------------------------------------------------------------------------------------------------------------------
